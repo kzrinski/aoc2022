@@ -45,7 +45,6 @@ fn main() {
             println!("Number of elves: {}\n",num_elves);
 
             let mut count: i32 = 1;
-            let mut index: i32 = 0;
 
             let mut max_cal: i32 = 0;
             let mut max_cal_elf_id = 0;
@@ -66,7 +65,6 @@ fn main() {
                 print!("Elf #{} has {:?} for a total of: {}\n", count,item,sum_of_cals);
 
                 count += 1;
-                index += 1;
             }
 
             print!("The elf with the most calories is #{} with {}",max_cal_elf_id,max_cal);
