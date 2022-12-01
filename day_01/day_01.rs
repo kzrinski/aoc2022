@@ -49,12 +49,11 @@ fn main() {
             let mut max_cal: i32 = 0;
             let mut max_cal_elf_id = 0;
 
+            let mut top3_elves: Vec<i32> = Vec::with_capacity(3);
+
             for item in calories_per_elf
             {
-                let mut sum_of_cals: i32 = 0;
-                for i in &item[0 .. item.len()]{
-                    sum_of_cals += i;
-                }
+                let sum_of_cals: i32 = item.iter().sum();
 
                 if sum_of_cals > max_cal 
                 {
@@ -64,8 +63,26 @@ fn main() {
 
                 print!("Elf #{} has {:?} for a total of: {}\n", count,item,sum_of_cals);
 
+                if top3_elves.len() < 3
+                {
+                    top3_elves.insert(0,sum_of_cals);
+                }
+                else{
+                    //reverse sort
+                    top3_elves.sort_by(|a,b| b.cmp(a));
+                    if top3_elves[2] < sum_of_cals{
+                        top3_elves.pop();
+                        top3_elves.insert(0, sum_of_cals);
+                    }
+                }
+
                 count += 1;
             }
+
+            print!("The top 3 calorie counts are {:?}\n",top3_elves);
+            let top3_sum: i32 = top3_elves.iter().sum();
+            print!("The total of these 3 elves is {}\n", top3_sum);
+            
 
             print!("The elf with the most calories is #{} with {}",max_cal_elf_id,max_cal);
         }
